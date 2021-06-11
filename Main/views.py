@@ -120,7 +120,10 @@ def new_schema(request):
 def fakecsv(request):
     if request.method == 'POST':
         schema = Schema.objects.get(id=request.POST['schema'])
-        rows = int(request.POST['rows'])
+        try:
+            rows = int(request.POST['rows'])
+        except ValueError:
+            rows = 10
         if schema.creator != request.user:
             return HttpResponseRedirect('/')
         dataset = DataSet.objects.create(
