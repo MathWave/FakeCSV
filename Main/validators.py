@@ -9,6 +9,11 @@ def string():
     return ''.join([choice(letters) for _ in range(20)])
 
 
+def en_string():
+    letters = 'qwertyuiopasdfghjklzxcvbnm'
+    return ''.join([choice(letters) for _ in range(20)])
+
+
 class Validator:
     def create(self, *args):
         raise Exception('Method create should be implemented')
@@ -42,12 +47,12 @@ class PhoneValidator(Validator):
 
 class DomainValidator(Validator):
     def create(self, *args):
-        return f'{string()}.{choice(domains)}'
+        return f'{en_string()}.{choice(domains)}'
 
 
 class EmailValidator(Validator):
     def create(self, *args):
-        return f'{string()}@{string()}.{choice(domains)}'
+        return f'{en_string()}@{en_string()}.{choice(domains)}'
 
 
 class FullnameValidator(Validator):

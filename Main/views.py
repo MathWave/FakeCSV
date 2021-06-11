@@ -2,7 +2,7 @@ from json import loads, dumps
 from threading import Thread
 
 from django.core.files.base import ContentFile
-from django.http import HttpResponseRedirect, FileResponse
+from django.http import HttpResponseRedirect, FileResponse, HttpResponse
 from django.shortcuts import render
 
 from Main.main import check_authorize
@@ -141,11 +141,12 @@ def fakecsv(request):
     return render(request, 'Main/fakecsv.html', {'schemas': Schema.objects.filter(creator=request.user)})
 
 
-@check_authorize
 def dataset_table(request):
-    return render(request, 'Main/dataset_table.html', {
-        'datasets': DataSet.objects.filter(schema__creator=request.user).order_by('id')
-    })
+    if request.user.is_authenticated:
+        return render(request, 'Main/dataset_table.html', {
+            'datasets': DataSet.objects.filter(schema__creator=request.user).order_by('id')
+        })
+    return HttpResponse('')
 
 
 @check_authorize
