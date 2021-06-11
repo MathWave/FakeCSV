@@ -128,10 +128,8 @@ def fakecsv(request):
             created=datetime.today(),
             status='I'
         )
-        dataset.status = 'P'
-        dataset.save()
         dataset.file.save('dataset.csv', ContentFile(''))
-        flag = True
+        flag = False
         if flag:
             generate_csv.delay(dataset.id, rows)
         else:
@@ -143,13 +141,16 @@ def fakecsv(request):
 @check_authorize
 def dataset_table(request):
     return render(request, 'Main/dataset_table.html', {
-        'datasets': DataSet.objects.filter(schema__creator=request.user)
+        'datasets': DataSet.objects.filter(schema__creator=request.user).order_by('id')
     })
 
 
 @check_authorize
 def download(request):
     obj = DataSet.objects.get(id=request.GET['id'])
+    if obj.schema.creator != request.user:
+        return HttpResponseRedirect('/')
     filename = obj.file.path
     response = FileResponse(open(filename, 'rb'))
+    response['Content-Disposition'] = 'inline; filename=dataset.csv'
     return response

@@ -77,7 +77,8 @@ class DataSet(models.Model):
     statuses = [
         ('P', 'Processing'),
         ('R', 'Ready'),
-        ('I', 'In queue')
+        ('I', 'In queue'),
+        ('F', 'Failed')
     ]
     schema = models.ForeignKey(Schema, on_delete=models.SET_NULL, null=True)
     status = models.CharField(max_length=2, choices=statuses, null=True)

@@ -14,9 +14,11 @@
                     <span class="badge badge-secondary"> Processing</span>
                 {% else %}{% if dataset.status == 'R' %}
                     <span class="badge badge-success">Ready</span>
+                {% else %}{% if dataset.status == 'F' %}
+                    <span class="badge badge-danger">Failed</span>
                 {% else %}
                     <span class="badge badge-warning">In queue</span>
-                {% endif %}{% endif %}
+                {% endif %}{% endif %}{% endif %}
             </h5>
         </td>
         <td class="schema-td">
