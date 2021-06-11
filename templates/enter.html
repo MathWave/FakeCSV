@@ -1,33 +1,15 @@
 {% extends 'base.html' %}
 
-{% block onCreate %}
-    const elem = document.getElementById('loginFrame');
-    const height = $(window).height();
-    elem.style.marginTop = (height / 3).toString() + "px";
-{% endblock %}
-
 {% block content %}
-    <div class="row" id="loginFrame">
-        <div class="col-5"></div>
-        <div class="col-2">
-            <div style="text-align: center; border: 1px solid gray;">
-                <h1 style="font-weight: lighter; margin-top: 40px;">Login</h1>
-                <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-8">
-                        <form method="POST">
-                            {% csrf_token %}
-                            <input style="width: 100%; margin-top: 40px;" type="text" name="username" placeholder="Username"><br>
-                            <input style="width: 100%; margin-top: 40px;" type="password" name="password" placeholder="Password"><br>
-                            <div style="text-align: end;">
-                            <button type="submit" style="align-self: end; margin-top: 40px; margin-bottom: 40px;" class="btn btn-primary">Login</button>
-                        </form>
-                </div>
-                    </div>
-                    <div class="col-2"></div>
-                </div>
+    <div style="text-align: center; border: 1px solid gray; width: 40%; padding: 5%; position: absolute; left: 30%; margin-top: 5%;">
+        <h1 style="font-weight: lighter; margin-top: 40px;">Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input style="width: 100%; margin-top: 40px;" type="text" name="username" placeholder="Username"><br>
+            <input style="width: 100%; margin-top: 40px;" type="password" name="password" placeholder="Password"><br>
+            <div style="text-align: end;">
+                <button type="submit" style="align-self: end; margin-top: 40px; margin-bottom: 40px;" class="btn btn-primary">Login</button>
             </div>
-        </div>
-        <div class="col-5"></div>
+        </form>
     </div>
 {% endblock %}
