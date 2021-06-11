@@ -1,0 +1,35 @@
+{% extends 'Main/base_main.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h3>Data schemas</h3>
+        </div>
+        <div class="col">
+            <a href="/new_schema" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">New schema</a>
+        </div>
+    </div>
+    <table style="width: 56%; margin-top: 30px;">
+        <tr>
+            <td class="schema-td"><b>#</b></td>
+            <td class="schema-td"><b>Title</b></td>
+            <td class="schema-td"><b>Modified</b></td>
+            <td class="schema-td"><b>Actions</b></td>
+        </tr>
+        {% for schema in schemas %}
+            <tr>
+                <td class="schema-td"><b>{{ schema.id }}</b></td>
+                <td class="schema-td"><a href="/new_schema?id={{ schema.id }}">{{ schema.name }}</a></td>
+                <td class="schema-td">{{ schema.modified_time|date:'Y-m-d' }}</td>
+                <td class="schema-td">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <a class="btn btn-link" href="/new_schema?id={{ schema.id }}">Edit schema</a>
+                        <input type="hidden" name="schema" value="{{ schema.id }}">
+                        <button type="submit" class="btn btn-link" style="color: red;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

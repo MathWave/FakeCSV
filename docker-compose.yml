@@ -1,0 +1,21 @@
+version: "3"
+
+
+services:
+  redis:
+    image: redis:alpine
+    command: redis-server
+  celery:
+    restart: always
+    image: fakecsv
+    command: "celery worker -A FakeCSV -l INFO"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - app
+  app:
+    image: fakecsv
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"

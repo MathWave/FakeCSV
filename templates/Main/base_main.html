@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="top" style="background-color: #F7F7F9">
+        <a class="top-title" style="text-decoration: none;" href="/">FakeCSV</a>
+        <a class="top-schemas" href="/schemas">Schemas</a>
+        <label class="top-hello">Hello, <b>{{ user }}</b></label>
+        <a class="top-logout" href="/logout">Logout</a>
+    </div>
+{% endblock %}

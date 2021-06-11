@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://use.fontawesome.com/49b98aaeb5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <style>
+        .top-title {
+            position: absolute;
+            width: 142.9px;
+            height: 17px;
+            left: 65.32px;
+            top: 16px;
+
+            font-family: HelveticaNeue;
+            font-size: 20px;
+            line-height: 17px;
+            /* identical to box height, or 85% */
+            display: flex;
+            align-items: flex-end;
+
+            color: rgba(0, 0, 0, 0.8);
+        }
+        .top-schemas {
+            position: absolute;
+            width: 111.02px;
+            height: 16px;
+            left: 224.71px;
+            top: 18px;
+            text-decoration: none;
+            font-family: HelveticaNeue;
+            font-size: 16px;
+            line-height: 16px;
+            /* identical to box height, or 100% */
+
+            color: rgba(0, 0, 0, 0.8);
+        }
+        .top-logout {
+            position: absolute;
+            width: 58px;
+            height: 16px;
+            right: 86px;
+            top: 19px;
+            text-decoration: none;
+            font-family: HelveticaNeue;
+            font-size: 16px;
+            line-height: 16px;
+            /* identical to box height, or 100% */
+
+            color: rgba(0, 0, 0, 0.3);
+        }
+        .top-hello {
+            position: absolute;
+            width: 129px;
+            height: 16px;
+            right: 155px;
+            top: 19px;
+
+            font-family: HelveticaNeue;
+            font-size: 16px;
+            line-height: 16px;
+            /* identical to box height, or 100% */
+
+            color: rgba(0, 0, 0, 0.3);
+        }
+        .top {
+            position: absolute;
+            width: 100%;
+            height: 54px;
+            left: 0px;
+            top: 0px;
+
+            background: #F7F7F9;
+            border-radius: 4px;
+        }
+        .content {
+            position: absolute;
+            width: 100%;
+            left: 10%;
+            right: 10%;
+            top: 82px;
+        }
+        .new-table {
+          table-layout: fixed ;
+          width: 80% ;
+            border: 1px solid black;
+        }
+        .new-td {
+            width: 25%;
+            padding: 10px;
+        }
+        .schema-td {
+            border: 1px solid rgb(200, 200, 200);
+            padding: 15px;
+        }
+        .label {
+            height: 24px;
+            margin-top: 16px;
+            font-family: HelveticaNeue;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height, or 150% */
+            display: flex;
+            align-items: flex-end;
+
+            color: #373A3C;
+        }
+        .schema-input {
+            width: 540px;
+            height: 38px;
+            background: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .table-input {
+            width: 80%;
+            height: 38px;
+            background: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        table.fixed { table-layout:fixed; }
+        table.fixed td { overflow: hidden; }
+
+    </style>
+    <title>Title</title>
+    <script type="text/javascript">
+        function onCreate() {
+            {% block onCreate %}
+            {% endblock %}
+        }
+    </script>
+</head>
+<body onload="onCreate()">
+    {% block header %}{% endblock %}
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

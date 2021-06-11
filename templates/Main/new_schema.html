@@ -1,0 +1,96 @@
+{% extends 'Main/base_main.html' %}
+
+{% load filters %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <h3>New schema</h3>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary" name="action" value="submit">Submit</button>
+            </div>
+        </div>
+        <input type="hidden" name="data" value="{{ data|serialize }}">
+        <label class="label">Name</label>
+        <input type="text" class="schema-input" name="schema_name" value="{{ data.schema_name }}">
+        <label class="label">Separator</label>
+        <select class="schema-input" name="separator">
+            {% for sep in separators %}
+                <option {% if sep.description == data.separator %}selected{% endif %}>{{ sep }}</option>
+            {% endfor %}
+        </select>
+        <label class="label">String character</label>
+        <select class="schema-input" name="character">
+            {% for char in string_characters %}
+                <option {% if char.description == data.character %}selected{% endif %}>{{ char }}</option>
+            {% endfor %}
+        </select>
+        <h3 style="margin-top: 30px;">Schema columns</h3>
+        {% for column in data.columns %}
+            <table class="new-table" style="border: none;">
+                <tr>
+                    <td class="new-td"><label class="label">Column name</label></td>
+                    <td class="new-td"><label class="label">Type</label></td>
+                    <td class="new-td"></td>
+                    <td class="new-td"><label class="label">Order</label></td>
+                </tr>
+                <tr>
+                    <td class="new-td"><input class="table-input" name="colname_{{ column.order }}" value="{{ column.name }}" style="width: 80%;"></td>
+                    <td class="new-td">
+                        <b>{{ column.type }}</b>
+                    </td>
+                    <td class="new-td">
+                        <div class="row">
+                            {% for key, val in column.extras.items %}
+                                <div class="col" style="margin-top: -25px;">
+                                    {{ key }}<br>
+                                    <input class="table-input" name="colextra_{{ column.order }}_{{ key }}" value="{{ val }}" style="width: 150px;">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td class="new-td">
+                        <table style="width: 400px;">
+                            <tr>
+                                <td style="width: 30%;">
+                                    <input class="table-input" name="colorder_{{ column.order }}" value="{{ column.order }}" style="width: 100%;">
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;" name="action" value="delete_{{ column.order }}">Delete</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+        <table class="new-table" style="margin-top: 30px;">
+            <tr>
+                <td class="new-td"><label class="label">Column name</label></td>
+                <td class="new-td"><label class="label">Type</label></td>
+                <td class="new-td"></td>
+                <td class="new-td"><label class="label">Order</label></td>
+            </tr>
+            <tr>
+                <td class="new-td"><input class="table-input" name="name" style="width: 80%;"></td>
+                <td class="new-td">
+                    <select id="dataType" class="table-input" name="type">
+                        {% for type in types %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td class="new-td">
+                    <div class="row" id="fields"></div>
+                </td>
+                <td class="new-td">
+                    <input class="table-input" name="order" style="width: 30%;">
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" type="submit" name="action" value="add" style="margin-top: 20px;">Add column</button>
+    </form>
+{% endblock %}

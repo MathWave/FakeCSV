@@ -1,0 +1,28 @@
+<tr>
+    <td class="schema-td"><b>#</b></td>
+    <td class="schema-td"><b>Created</b></td>
+    <td class="schema-td"><b>Status</b></td>
+    <td class="schema-td"><b>Actions</b></td>
+</tr>
+{% for dataset in datasets %}
+    <tr>
+        <td class="schema-td"><b>{{ dataset.id }}</b></td>
+        <td class="schema-td">{{ dataset.created|date:'Y-m-d' }}</td>
+        <td class="schema-td">
+            <h5>
+                {% if dataset.status == 'P' %}
+                    <span class="badge badge-secondary"> Processing</span>
+                {% else %}{% if dataset.status == 'R' %}
+                    <span class="badge badge-success">Ready</span>
+                {% else %}
+                    <span class="badge badge-warning">In queue</span>
+                {% endif %}{% endif %}
+            </h5>
+        </td>
+        <td class="schema-td">
+            {% if dataset.status == 'R' %}
+                <a class="btn btn-link" href="/download?id={{ dataset.id }}">Download</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
