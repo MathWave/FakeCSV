@@ -132,11 +132,7 @@ def fakecsv(request):
             status='I'
         )
         dataset.file.save('dataset.csv', ContentFile(''))
-        flag = False
-        if flag:
-            generate_csv.delay(dataset.id, rows)
-        else:
-            Thread(target=lambda: generate_csv(dataset.id, rows)).start()
+        generate_csv.delay(dataset.id, rows)
         return HttpResponseRedirect('/')
     return render(request, 'Main/fakecsv.html', {'schemas': Schema.objects.filter(creator=request.user)})
 

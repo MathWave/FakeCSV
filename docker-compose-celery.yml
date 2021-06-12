@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  celery:
+    restart: always
+    image: fakecsv
+    command: "celery -A FakeCSV worker -l INFO"
+    volumes:
+      - .:/app

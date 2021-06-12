@@ -9,6 +9,8 @@ import pandas as pd
 @app.task
 def generate_csv(dataset_id, rows):
     dataset = DataSet.objects.get(id=dataset_id)
+    dataset.status = 'P'
+    dataset.save()
     try:
         sep = dataset.schema.separator.separator
         char = dataset.schema.string_character.character

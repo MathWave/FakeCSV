@@ -7,15 +7,18 @@ services:
     command: redis-server
   celery:
     restart: always
-    image: fakecsv
-    command: "celery worker -A FakeCSV -l INFO"
+    build: .
+    command: "celery -A FakeCSV worker -l INFO"
     volumes:
       - .:/app
     depends_on:
       - redis
-      - app
-  app:
+      - web
+  web:
+    build: .
     image: fakecsv
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver https://fakecsv2021.herokuapp.com:443
     ports:
-      - "8000:8000"
+      - "443:443"
+    volumes:
+    - .:/app
