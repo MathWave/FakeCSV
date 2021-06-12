@@ -141,4 +141,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_TASK_TRACK_STARTED = True
 # CELERY_BROKER_URL = 'redis://redis:6379/0'
-CELERY_BROKER_URL = 'redis://:p5ad20b9bda3cf3fbfd91e709d00a632dc0d990a6da4fa01ef9044e9d7c30ec2d@ec2-54-157-252-206.compute-1.amazonaws.com:32099'
+CELERY_BROKER_URL = 'rediss://:p5ad20b9bda3cf3fbfd91e709d00a632dc0d990a6da4fa01ef9044e9d7c30ec2d@ec2-54-157-252-206.compute-1.amazonaws.com:32100'

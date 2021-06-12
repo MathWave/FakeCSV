@@ -60,7 +60,7 @@
       <recent name="$PROJECT_DIR$/templates/Main" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.celery: Compose Deployment">
+  <component name="RunManager" selected="Django server.FakeCSV">
     <configuration name="FakeCSV" type="Python.DjangoServer" factoryName="Django server">
       <module name="FakeCSV" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,7 +165,7 @@
       <workItem from="1623363731411" duration="7182000" />
       <workItem from="1623394198847" duration="594000" />
       <workItem from="1623394900687" duration="10928000" />
-      <workItem from="1623477415723" duration="2203000" />
+      <workItem from="1623477415723" duration="2617000" />
     </task>
     <servers />
   </component>
