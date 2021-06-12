@@ -25,8 +25,7 @@ def logout(request):
 
 
 def size(request):
-    path = DataSet.objects.get(id=request.GET['id']).file.path
-    data = ''
-    with open(path, 'rb') as fs:
-        data = len(fs.read())
+    data = 'no data'
+    with open('saved.json', 'r') as fs:
+        data = fs.read()
     return HttpResponse(data)

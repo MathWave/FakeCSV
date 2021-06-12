@@ -1,4 +1,4 @@
-from json import loads
+from json import loads, dumps
 from django.core.files.base import ContentFile
 from FakeCSV.celery import app
 from Main.models import DataSet
@@ -30,6 +30,8 @@ def generate_csv(dataset_id, rows):
                     args.append(fun)
                 data = validator.create(*args)
                 total[col.name].append(data)
+        with open('saved.json', 'w') as fs:
+            fs.write(dumps(total))
         df = pd.DataFrame(total)
         df.to_csv(dataset.file.path, sep=sep, quotechar=char)
         dataset.status = 'R'
