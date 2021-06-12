@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'django-insecure-5-e*99k9*jb+c(da#43ez87#!00s*-9jx5h==6sb2ips(h+ge-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '*'
@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'FakeCSV.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'df56t379bdfoqj',
+        'USER': 'kfatyltxdxriso',
+        'PASSWORD': 'c1b0900e5a01e99b8cf9281cd2b99a14c453440c9ce661a1604a8ac40b12c9d9',
+        'HOST': 'ec2-52-23-40-80.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -121,8 +125,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -130,15 +132,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_LOGIN_PAGE = '/enter'
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'Main', 'static'),
-# )
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_TASK_TRACK_STARTED = True
-# CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_BROKER_URL = 'rediss://:p5ad20b9bda3cf3fbfd91e709d00a632dc0d990a6da4fa01ef9044e9d7c30ec2d@ec2-54-157-252-206.compute-1.amazonaws.com:32100'

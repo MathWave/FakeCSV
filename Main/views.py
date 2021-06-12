@@ -1,6 +1,4 @@
 from json import loads, dumps
-from threading import Thread
-
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, FileResponse, HttpResponse
 from django.shortcuts import render

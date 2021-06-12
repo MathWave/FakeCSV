@@ -23,7 +23,7 @@
             </div>
             <div class="col" style="margin-right: 23%;">
                 Rows: <input class="table-input" name="rows" style="width: 100px;">
-                <button type="submit" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">Generate data</button>
+                <button {% if not schemas %}disabled{% endif %} type="submit" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">Generate data</button>
             </div>
         </div>
     </form>
