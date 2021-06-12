@@ -4,13 +4,6 @@
     <list default="true" id="24140b88-61cc-4460-89f2-923542a342d7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FakeCSV/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FakeCSV/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +165,7 @@
       <workItem from="1623363731411" duration="7182000" />
       <workItem from="1623394198847" duration="594000" />
       <workItem from="1623394900687" duration="10928000" />
-      <workItem from="1623477415723" duration="1765000" />
+      <workItem from="1623477415723" duration="2203000" />
     </task>
     <servers />
   </component>
@@ -264,11 +257,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Main/views.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Main/tasks.py</url>
           <line>10</line>
