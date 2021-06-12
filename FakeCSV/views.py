@@ -1,8 +1,9 @@
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 from FakeCSV.settings import DEFAULT_LOGIN_PAGE
+from Main.models import DataSet
 
 
 def enter(request):
@@ -21,3 +22,11 @@ def enter(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(DEFAULT_LOGIN_PAGE)
+
+
+def size(request):
+    path = DataSet.objects.get(id=request.GET['id']).file.path
+    data = ''
+    with open(path, 'rb') as fs:
+        data = len(fs.read())
+    return HttpResponse(data)

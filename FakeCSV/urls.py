@@ -20,6 +20,7 @@ from FakeCSV import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('size', views.size),
     path('enter', views.enter),
     path('logout', views.logout),
     path('', include('Main.urls')),
