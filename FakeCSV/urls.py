@@ -27,10 +27,3 @@ urlpatterns = [
     path('logout', views.logout),
     path('', include('Main.urls')),
 ]
-
-CELERY_STARTED = False
-
-if not CELERY_STARTED:
-    print('connected')
-    CELERY_STARTED = True
-    Popen('celery -A FakeCSV worker -l INFO', shell=True)
