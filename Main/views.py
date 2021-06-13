@@ -143,8 +143,8 @@ def fakecsv(request):
             created=datetime.today(),
             status='I'
         )
-        Thread(target=lambda: generate_csv(dataset.id, rows)).start()
-        # generate_csv.delay(dataset.id, rows)
+        # Thread(target=lambda: generate_csv(dataset.id, rows)).start()
+        generate_csv.delay(dataset.id, rows)
         return HttpResponseRedirect('/')
     return render(request, 'Main/fakecsv.html', {'schemas': Schema.objects.filter(creator=request.user)})
 
