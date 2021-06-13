@@ -149,6 +149,6 @@ def download(request):
     if obj.schema.creator != request.user:
         return HttpResponseRedirect('/')
     filename = obj.file.path
-    response = FileResponse(open(filename, 'rb'))
+    response = HttpResponse(bytes(open(filename, 'r').read(), encoding='utf-8'), content_type='application/force-download')
     response['Content-Disposition'] = 'inline; filename=dataset.csv'
     return response
