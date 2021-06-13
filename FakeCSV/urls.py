@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from subprocess import Popen
+
 from django.contrib import admin
 from django.urls import path, include
 from FakeCSV import views
@@ -25,3 +27,10 @@ urlpatterns = [
     path('logout', views.logout),
     path('', include('Main.urls')),
 ]
+
+CELERY_STARTED = False
+
+if not CELERY_STARTED:
+    print('connected')
+    CELERY_STARTED = True
+    Popen('celery -A FakeCSV worker -l INFO', shell=True)

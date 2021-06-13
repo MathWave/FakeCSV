@@ -37,3 +37,9 @@ def generate_csv(dataset_id, rows):
         dataset.status = 'F'
         dataset.save()
         print(e)
+
+
+def download_file(dataset_id):
+    ds = DataSet.objects.get(id=dataset_id)
+    filename = ds.file.path
+
