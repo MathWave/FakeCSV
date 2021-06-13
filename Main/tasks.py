@@ -17,7 +17,7 @@ def generate_csv(dataset_id, rows):
             args = []
             for val in col.extras:
                 lo = [d for d in col.col_type.specials if d['name'] == val['name']][0]['type']
-                ar = f'({val["value"]})'
+                ar = f'("{val["value"]}")'
                 fun = eval(lo + ar)
                 args.append(fun)
             total[col.name] = [validator.create(*args) for _ in range(rows)]
