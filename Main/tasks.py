@@ -29,8 +29,6 @@ def generate_csv(dataset_id, rows):
                     args.append(fun)
                 data = validator.create(*args)
                 total[col.name].append(data)
-        with open('saved.json', 'w') as fs:
-            fs.write(dumps(total))
         df = pd.DataFrame(total)
         df.to_csv(dataset.file.path, sep=sep, quotechar=char)
         dataset.status = 'R'
