@@ -164,7 +164,9 @@ def download(request):
         return HttpResponseRedirect('/')
     df = pd.DataFrame(obj.data)
     s = io.StringIO()
-    df.to_csv(s)
+    sep = obj.schema.separator.separator
+    char = obj.schema.string_character.character
+    df.to_csv(s, sep=sep, quotechar=char)
     response = HttpResponse(bytes(s.getvalue(), encoding='utf-8'), content_type='application/force-download')
     response['Content-Disposition'] = 'inline; filename=dataset.csv'
     return response
