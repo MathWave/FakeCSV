@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from random import choice, randrange
 
 
@@ -58,3 +59,14 @@ class EmailValidator(Validator):
 class FullnameValidator(Validator):
     def create(self, *args):
         return f'{string()} {string()}'
+
+
+class DateValidator(Validator):
+    def create(self, *args):
+        start_date = datetime.strptime(args[0], '%Y-%m-%d')
+        end_date = datetime.strptime(args[1], '%Y-%m-%d')
+
+        time_between_dates = end_date - start_date
+        days_between_dates = time_between_dates.days
+        new_date = start_date + timedelta(days=randrange(days_between_dates))
+        return new_date.strftime('%Y-%m-%d')
