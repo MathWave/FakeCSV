@@ -15,7 +15,8 @@ app = Celery('FakeCSV')
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
-app.conf.update(BROKER_URL=os.getenv('REDIS_URL', settings.CELERY_BROKER_URL))
+app.conf.update(BROKER_URL=os.getenv('REDIS_URL', settings.CELERY_BROKER_URL),
+                CELERY_RESULT_BACKEND=os.getenv('REDIS_URL', settings.CELERY_RESULT_BACKEND))
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
