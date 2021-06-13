@@ -1,8 +1,6 @@
 from json import loads, dumps
-from django.core.files.base import ContentFile
 from FakeCSV.celery import app
 from Main.models import DataSet
-from Main.validators import *
 import pandas as pd
 
 
