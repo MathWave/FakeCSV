@@ -2,6 +2,7 @@ from json import loads, dumps
 from FakeCSV.celery import app
 from Main.models import DataSet
 import pandas as pd
+from Main.validators import *
 
 
 @app.task
@@ -34,6 +35,7 @@ def generate_csv(dataset_id, rows):
         df.to_csv(dataset.file.path, sep=sep, quotechar=char)
         dataset.status = 'R'
         dataset.save()
-    except:
+    except Exception as e:
         dataset.status = 'F'
         dataset.save()
+        print(e)
