@@ -44,10 +44,10 @@
                     </td>
                     <td class="new-td">
                         <div class="row">
-                            {% for key, val in column.extras.items %}
+                            {% for pos, ext in column.extras|enum %}
                                 <div class="col" style="margin-top: -25px;">
-                                    {{ key }}<br>
-                                    <input class="table-input" name="colextra_{{ column.order }}_{{ key }}" value="{{ val }}" style="width: 150px;">
+                                    {{ ext.name }}<br>
+                                    <input class="table-input" type="{{ ext.input_type }}" name="colextra_{{ column.order }}_{{ pos }}" value="{{ ext.value }}" style="width: 150px;">
                                 </div>
                             {% endfor %}
                         </div>

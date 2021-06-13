@@ -1,4 +1,8 @@
+import io
 from json import loads, dumps
+from threading import Thread
+
+import pandas as pd
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, FileResponse, HttpResponse
 from django.shortcuts import render
@@ -40,7 +44,7 @@ def new_schema(request):
                 'name': col.name,
                 'type': col.col_type.name,
                 'order': col.order,
-                'extras': loads(col.extras)
+                'extras': col.extras
             }
             data['columns'].append(column)
     elif request.method == 'POST':
@@ -57,15 +61,25 @@ def new_schema(request):
                 data['columns'][int(coldata[1]) - 1]['order'] = int(request.POST[key]) if request.POST[key].isnumeric() else data['columns'][int(coldata[1]) - 1]['order']
             elif key.startswith('colextra_'):
                 coldata = key.split('_')
-                data['columns'][int(coldata[1]) - 1]['extras'][coldata[2]] = request.POST[key]
+                d = data['columns'][int(coldata[1]) - 1]['extras'][int(coldata[2])]
+                data['columns'][int(coldata[1]) - 1]['extras'][int(coldata[2])] = {
+                    'name': d['name'],
+                    'input_type': d['input_type'],
+                    'value': request.POST[key]
+                }
         if request.POST['action'] == 'add':
             column = {
                 'name': request.POST['name'],
                 'type': request.POST['type'],
                 'order': int(request.POST['order']) if request.POST['order'].isnumeric() else 10e10,
-                'extras': {
-                    val: '' for val in loads(ColumnType.objects.get(name=request.POST['type']).specials).keys()
-                }
+                'extras': [
+                    {
+                        'name': val['name'],
+                        'value': '',
+                        'input_type': val['input_type']
+                    }
+                    for val in ColumnType.objects.get(name=request.POST['type']).specials
+                ]
             }
             if len(data['columns']) == 0:
                 column['order'] = 1
@@ -99,7 +113,7 @@ def new_schema(request):
                     col_type=ColumnType.objects.get(name=column['type']),
                     name=column['name'],
                     order=column['order'],
-                    extras=dumps(column['extras'])
+                    extras=column['extras']
                 )
             return HttpResponseRedirect('/schemas')
         else:
@@ -129,7 +143,7 @@ def fakecsv(request):
             created=datetime.today(),
             status='I'
         )
-        dataset.file.save('dataset.csv', ContentFile(''))
+        # Thread(target=lambda: generate_csv(dataset.id, rows)).start()
         generate_csv.delay(dataset.id, rows)
         return HttpResponseRedirect('/')
     return render(request, 'Main/fakecsv.html', {'schemas': Schema.objects.filter(creator=request.user)})
@@ -148,7 +162,9 @@ def download(request):
     obj = DataSet.objects.get(id=request.GET['id'])
     if obj.schema.creator != request.user:
         return HttpResponseRedirect('/')
-    filename = obj.file.path
-    response = HttpResponse(bytes(open(filename, 'r').read(), encoding='utf-8'), content_type='application/force-download')
+    df = pd.DataFrame(obj.data)
+    s = io.StringIO()
+    df.to_csv(s)
+    response = HttpResponse(bytes(s.getvalue(), encoding='utf-8'), content_type='application/force-download')
     response['Content-Disposition'] = 'inline; filename=dataset.csv'
     return response

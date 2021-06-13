@@ -8,3 +8,8 @@ register = template.Library()
 @register.filter('serialize')
 def serialize(d):
     return dumps(d)
+
+
+@register.filter('enum')
+def enum(collection):
+    return enumerate(collection)

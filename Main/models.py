@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db.models import JSONField
 from django.db import models
 
 
@@ -35,7 +36,7 @@ class Schema(models.Model):
 
     @property
     def columns(self):
-        return Column.objects.filter(schema=self)
+        return Column.objects.filter(schema=self).order_by('order')
 
     def __str__(self):
         return self.name
@@ -47,7 +48,7 @@ class Schema(models.Model):
 
 class ColumnType(models.Model):
     name = models.CharField(max_length=32, verbose_name='Название')
-    specials = models.TextField(null=True, verbose_name='Дополнительные параметры')
+    specials = JSONField(null=True, verbose_name='Дополнительные параметры')
     validator = models.CharField(null=True, max_length=32, verbose_name='Класс-валидатор')
 
     def __str__(self):
@@ -63,7 +64,7 @@ class Column(models.Model):
     col_type = models.ForeignKey(ColumnType, on_delete=models.CASCADE, verbose_name='Тип колонки')
     name = models.CharField(verbose_name='Имя колонки', max_length=32)
     order = models.IntegerField(verbose_name='Порядковый номер')
-    extras = models.TextField(verbose_name='Дополнительные параметры', default='{}')
+    extras = JSONField(verbose_name='Дополнительные параметры', null=True)
 
     def __str__(self):
         return self.schema.name + ' | ' + self.name
@@ -83,7 +84,7 @@ class DataSet(models.Model):
     schema = models.ForeignKey(Schema, on_delete=models.SET_NULL, null=True)
     status = models.CharField(max_length=2, choices=statuses, null=True)
     created = models.DateField()
-    file = models.FileField(verbose_name='Файл', upload_to='datasets', null=True)
+    data = JSONField(verbose_name='Данные', null=True)
 
     class Meta:
         verbose_name = 'Датасет'

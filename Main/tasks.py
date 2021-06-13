@@ -11,35 +11,20 @@ def generate_csv(dataset_id, rows):
     dataset.status = 'P'
     dataset.save()
     try:
-        sep = dataset.schema.separator.separator
-        char = dataset.schema.string_character.character
-        columns = [col.name for col in dataset.schema.columns]
-        total = {
-            col: [] for col in columns
-        }
-        for _ in range(rows):
-            for col in dataset.schema.columns:
-                validator = eval(col.col_type.validator)()
-                args = []
-                ex = loads(col.extras)
-                for key in ex.keys():
-                    lo = loads(col.col_type.specials)[key]
-                    ar = f'({ex[key]})'
-                    fun = eval(lo + ar)
-                    args.append(fun)
-                data = validator.create(*args)
-                total[col.name].append(data)
-        df = pd.DataFrame(total)
-        df.to_csv(dataset.file.path, sep=sep, quotechar=char)
+        total = {}
+        for col in dataset.schema.columns:
+            validator = eval(col.col_type.validator)()
+            args = []
+            for val in col.extras:
+                lo = [d for d in col.col_type.specials if d['name'] == val['name']][0]['type']
+                ar = f'({val["value"]})'
+                fun = eval(lo + ar)
+                args.append(fun)
+            total[col.name] = [validator.create(*args) for _ in range(rows)]
+        dataset.data = total
         dataset.status = 'R'
         dataset.save()
     except Exception as e:
         dataset.status = 'F'
         dataset.save()
         print(e)
-
-
-def download_file(dataset_id):
-    ds = DataSet.objects.get(id=dataset_id)
-    filename = ds.file.path
-
