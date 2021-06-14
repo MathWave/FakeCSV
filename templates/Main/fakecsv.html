@@ -13,11 +13,11 @@
     <div>
         <form method="POST">
             {% csrf_token %}
-            <div class="row" style="width: 56%;">
+            <div class="row">
                 <div class="col">
                     <h3>Data sets</h3>
                 </div>
-                <div class="col" style="float: right;">
+                <div class="col-1">
                     <select class="table-input" name="schema" style="width: 150px;">
                         {% for schema in schemas %}
                             <option value="{{ schema.id }}">{{ schema.name }}</option>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col" style="margin-right: 23%;">
                     Rows: <input class="table-input" name="rows" style="width: 100px;">
-                    <button {% if not schemas %}disabled{% endif %} type="submit" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">Generate data</button>
+                    <button type="submit" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">Generate data</button>
                 </div>
             </div>
         </form>
