@@ -162,7 +162,10 @@ def download(request):
     obj = DataSet.objects.get(id=request.GET['id'])
     if obj.schema.creator != request.user:
         return HttpResponseRedirect('/')
-    df = pd.DataFrame(obj.data)
+    data = {}
+    for col in obj.schema.columns:
+        data[col.name] = obj.data[col.name]
+    df = pd.DataFrame(data)
     s = io.StringIO()
     sep = obj.schema.separator.separator
     char = obj.schema.string_character.character

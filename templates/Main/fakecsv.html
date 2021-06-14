@@ -8,26 +8,28 @@
 {% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col">
-                <h3>Data sets</h3>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row" style="width: 56%;">
+                <div class="col">
+                    <h3>Data sets</h3>
+                </div>
+                <div class="col" style="float: right;">
+                    <select class="table-input" name="schema" style="width: 150px;">
+                        {% for schema in schemas %}
+                            <option value="{{ schema.id }}">{{ schema.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col" style="margin-right: 23%;">
+                    Rows: <input class="table-input" name="rows" style="width: 100px;">
+                    <button {% if not schemas %}disabled{% endif %} type="submit" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">Generate data</button>
+                </div>
             </div>
-            <div class="col-1">
-                <select class="table-input" name="schema" style="width: 150px;">
-                    {% for schema in schemas %}
-                        <option value="{{ schema.id }}">{{ schema.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col" style="margin-right: 23%;">
-                Rows: <input class="table-input" name="rows" style="width: 100px;">
-                <button {% if not schemas %}disabled{% endif %} type="submit" class="btn btn-success" style="background-color: #5CB85C; border-color: #5CB85C;">Generate data</button>
-            </div>
-        </div>
-    </form>
-    <table id="main_table" style="width: 56%; margin-top: 30px;">
+        </form>
+        <table id="main_table" style="width: 56%; margin-top: 30px; margin-bottom: 30px;">
 
-    </table>
+        </table>
+    </div>
 {% endblock %}
