@@ -86,6 +86,9 @@ class DataSet(models.Model):
     created = models.DateField()
     data = JSONField(verbose_name='Данные', null=True)
 
+    def __str__(self):
+        return f'{self.schema} ({self.id})'
+
     class Meta:
         verbose_name = 'Датасет'
         verbose_name_plural = 'Датасеты'

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24140b88-61cc-4460-89f2-923542a342d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Main/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/css/styles.css.gz" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/css/styles.css.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/staticfiles.json" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/staticfiles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Main/base_main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Main/base_main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +171,7 @@
       <workItem from="1623597792318" duration="931000" />
       <workItem from="1623614829614" duration="4893000" />
       <workItem from="1623620516079" duration="2181000" />
-      <workItem from="1623646879853" duration="5580000" />
+      <workItem from="1623646879853" duration="5894000" />
     </task>
     <servers />
   </component>
